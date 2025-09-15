@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from backend.pipeline import transcribe_audio, analyze_transcripts
 
-app = FastAPI(title="Voice Detective")
+app = FastAPI(title="Voice Detective-Truth Whisper")
 
 # Enable CORS (frontend access)
 app.add_middleware(

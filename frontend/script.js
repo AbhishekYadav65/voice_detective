@@ -74,7 +74,45 @@ document.getElementById("analyzeBtn").addEventListener("click", async () => {
     analyzeStatus.style.color = "lightgreen";
 
     const report = document.getElementById("report");
-    report.textContent = data.analysis;
+    report.innerHTML = ""; // clear old content
+
+    // ✅ Handle `analysis` array returned from backend
+    if (data.analysis && Array.isArray(data.analysis)) {
+      data.analysis.forEach(item => {
+        const scorePercent = Math.round((item.truth_score || 0) * 100);
+
+        // 🟢 Quick summary card with color-coded truth score
+        const summary = document.createElement("div");
+        summary.className = "summary-card";
+
+        // decide color class based on truth score
+        let scoreClass = "score-low";
+        if (scorePercent >= 75) scoreClass = "score-high";
+        else if (scorePercent >= 50) scoreClass = "score-medium";
+
+        summary.classList.add(scoreClass);
+
+        summary.innerHTML = `
+          <p>🕵️ <b>${item.shadow_id}</b></p>
+          <p>Truth Score: <b>${scorePercent}%</b></p>
+          <p>Experience: <i>${item.revealed_truth?.programming_experience || "unknown"}</i></p>
+        `;
+        report.appendChild(summary);
+
+        // 📂 Collapsible block with JSON
+        const block = document.createElement("details");
+        block.open = false; // collapsed by default
+        block.innerHTML = `
+          <summary>📂 Raw JSON Analysis</summary>
+          <div class="truth-score-bar" style="--score:${scorePercent}%"></div>
+          <pre>${JSON.stringify(item, null, 2)}</pre>
+        `;
+        report.appendChild(block);
+      });
+    } else {
+      // fallback
+      report.textContent = JSON.stringify(data, null, 2);
+    }
 
     document.getElementById("reportCard").style.display = "block";
   } catch (err) {

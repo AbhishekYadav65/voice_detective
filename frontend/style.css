@@ -1,14 +1,62 @@
 body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  }
-  .card {
-    border-radius: 12px;
-  }
-  #status, #analyzeStatus {
-    font-weight: bold;
-  }
-  pre {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-  
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+#status, 
+#analyzeStatus {
+  font-weight: bold;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* 🎯 JSON report styling */
+#report {
+  background-color: #ffffff; /* white background */
+  color: #000000;            /* black text */
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-family: monospace;
+}
+
+/* 🟢 Summary cards */
+.summary-card {
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border-left: 5px solid #ccc; /* default */
+}
+
+/* 🔴 Low score */
+.score-low {
+  border-left-color: #e53935; /* red */
+  background: #ffeaea;
+}
+
+/* 🟠 Medium score */
+.score-medium {
+  border-left-color: #ff9800; /* orange */
+  background: #fff3e0;
+}
+
+/* 🟢 High score */
+.score-high {
+  border-left-color: #4caf50; /* green */
+  background: #e8f5e9;
+}
+
+/* Truth score progress bar */
+.truth-score-bar {
+  height: 8px;
+  border-radius: 5px;
+  margin: 0.5rem 0;
+  background: linear-gradient(to right, #4caf50 var(--score, 50%), #ddd var(--score, 50%));
+}
