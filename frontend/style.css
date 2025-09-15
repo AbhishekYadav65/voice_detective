@@ -1,0 +1,14 @@
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .card {
+    border-radius: 12px;
+  }
+  #status, #analyzeStatus {
+    font-weight: bold;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
