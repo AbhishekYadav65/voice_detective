@@ -59,6 +59,8 @@ From the *Whispering Shadows Mystery*:
 
 
 
+## 🎬 Demo Video
+Watch the full demo on YouTube: [Team Nemesis](https://youtu.be/NcU2PXkBk-U)
 
 
 ---
