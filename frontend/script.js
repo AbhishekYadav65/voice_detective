@@ -1,5 +1,6 @@
 let uploadedTranscripts = []; // store transcripts for analysis
 
+// Upload & Transcribe
 document.getElementById("uploadBtn").addEventListener("click", async () => {
   const fileInput = document.getElementById("fileInput");
   if (!fileInput.files.length) {
@@ -48,6 +49,7 @@ document.getElementById("uploadBtn").addEventListener("click", async () => {
   }
 });
 
+// Analyze transcripts
 document.getElementById("analyzeBtn").addEventListener("click", async () => {
   if (!uploadedTranscripts.length) {
     alert("⚠️ No transcripts available to analyze.");
@@ -81,15 +83,13 @@ document.getElementById("analyzeBtn").addEventListener("click", async () => {
       data.analysis.forEach(item => {
         const scorePercent = Math.round((item.truth_score || 0) * 100);
 
-        // 🟢 Quick summary card with color-coded truth score
+        // 🟢 Quick summary card
         const summary = document.createElement("div");
         summary.className = "summary-card";
 
-        // decide color class based on truth score
         let scoreClass = "score-low";
         if (scorePercent >= 75) scoreClass = "score-high";
         else if (scorePercent >= 50) scoreClass = "score-medium";
-
         summary.classList.add(scoreClass);
 
         summary.innerHTML = `
@@ -99,15 +99,29 @@ document.getElementById("analyzeBtn").addEventListener("click", async () => {
         `;
         report.appendChild(summary);
 
-        // 📂 Collapsible block with JSON
+        // 📂 Collapsible JSON
         const block = document.createElement("details");
-        block.open = false; // collapsed by default
+        block.open = false;
         block.innerHTML = `
           <summary>📂 Raw JSON Analysis</summary>
-          <div class="truth-score-bar" style="--score:${scorePercent}%"></div>
+          <div class="truth-score-bar" data-score="${scorePercent}"></div>
           <pre>${JSON.stringify(item, null, 2)}</pre>
         `;
         report.appendChild(block);
+
+        // ✅ Animate truth score bar with gradient
+        const bar = block.querySelector(".truth-score-bar");
+        if (scorePercent < 50) {
+          bar.style.background = "linear-gradient(to right, #e53935, #ff7043)";
+        } else if (scorePercent < 75) {
+          bar.style.background = "linear-gradient(to right, #ff9800, #fdd835)";
+        } else {
+          bar.style.background = "linear-gradient(to right, #4caf50, #81c784)";
+        }
+
+        requestAnimationFrame(() => {
+          bar.style.width = scorePercent + "%";
+        });
       });
     } else {
       // fallback

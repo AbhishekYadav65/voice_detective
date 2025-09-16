@@ -1,24 +1,56 @@
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #0d0d0d;
+  color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+
+  /* 🔲 Subtle animated grid background */
+  background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  animation: gridMove 20s linear infinite;
 }
 
+@keyframes gridMove {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 40px 40px;
+  }
+}
+
+/* Card styling */
 .card {
   border-radius: 12px;
+  background: #2c2c2c;
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 900px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
-#status, 
+/* Status text */
+#status,
 #analyzeStatus {
   font-weight: bold;
+  margin-top: 0.5rem;
 }
 
+/* Transcript box */
 pre {
   white-space: pre-wrap;
   word-wrap: break-word;
+  background: #1e1e1e;
+  padding: 1rem;
+  border-radius: 8px;
+  color: #eaeaea;
 }
 
-/* 🎯 JSON report styling */
+/* 🎯 JSON report container */
 #report {
-  background-color: #ffffff; /* white background */
+  background-color: #ffffff; /* force white background */
   color: #000000;            /* black text */
   padding: 1rem;
   border-radius: 8px;
@@ -28,35 +60,53 @@ pre {
 
 /* 🟢 Summary cards */
 .summary-card {
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  padding: 15px 20px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border-left: 6px solid #ccc;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  border-left: 5px solid #ccc; /* default */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+.summary-card:hover {
+  transform: scale(1.02); /* 🖱️ small hover movement */
 }
 
 /* 🔴 Low score */
 .score-low {
-  border-left-color: #e53935; /* red */
+  border-left-color: #e53935;
   background: #ffeaea;
 }
 
 /* 🟠 Medium score */
 .score-medium {
-  border-left-color: #ff9800; /* orange */
+  border-left-color: #ff9800;
   background: #fff3e0;
 }
 
 /* 🟢 High score */
 .score-high {
-  border-left-color: #4caf50; /* green */
+  border-left-color: #4caf50;
   background: #e8f5e9;
 }
 
 /* Truth score progress bar */
 .truth-score-bar {
-  height: 8px;
-  border-radius: 5px;
+  height: 12px;
+  border-radius: 6px;
   margin: 0.5rem 0;
-  background: linear-gradient(to right, #4caf50 var(--score, 50%), #ddd var(--score, 50%));
+  width: 0; /* start collapsed */
+  transition: width 1.2s ease-in-out;
+  position: relative;
+}
+
+/* % text inside the bar */
+.truth-score-bar::after {
+  content: attr(data-score) "%";
+  position: absolute;
+  right: 8px;
+  top: -22px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #333;
 }
