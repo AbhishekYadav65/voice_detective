@@ -63,6 +63,18 @@ From the *Whispering Shadows Mystery*:
 Watch the full demo on YouTube: [Team Nemesis](https://youtu.be/NcU2PXkBk-U)
 
 
+
+## 🧩 Bonus: Agentic Flow (Concept)
+
+In a real interview setting, our AI Detective could behave as an **agent** with different states:  
+
+- **Listening** → capturing candidate’s voice.  
+- **Analyzing** → transcribing + extracting contradictions.  
+- **Clarifying** → if contradictions or hesitations are detected, it could ask for more details.  
+- **Finalizing** → generate the truth report once confidence is high.  
+
+This simple agentic design shows how the Voice Detective could adapt in real time.
+
 ---
 
 ## ⚙️ Setup Instructions  
@@ -113,9 +125,3 @@ voice_detective/
 │── truth_report_ui.png     # Screenshot – truth report demo
 │── jason_report_ui.png     # Screenshot – JSON report demo
 │── run_backend.bat         # Quickstart script (Windows)
-
-
-
-
-
-
